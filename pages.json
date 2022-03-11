@@ -1,0 +1,47 @@
+{
+	"pages": [
+		// {
+		// 	"path": "pages/images/images",
+		// 	"style": {
+		// 		"navigationBarTitleText": "YQ图库",
+		// 		"enablePullDownRefresh": true
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/logon/logon",
+		// 	"style": {
+		// 		"navigationBarTitleText": "登录"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/user/user",
+		// 	"style": {
+		// 		"navigationBarTitleText": "个人中心"
+		// 	}
+		// },
+		{
+			"path": "pages/images/image_details",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/comments/comments",
+			"style": {
+				"navigationBarTitleText": "评论"
+			}
+		},
+		{
+			"path": "pages/test/test",
+			"style": {
+				"navigationBarTitleText": "测试"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"backgroundColor": "#FFFFFF"
+	}
+}

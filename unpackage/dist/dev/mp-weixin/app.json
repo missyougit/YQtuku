@@ -1,0 +1,16 @@
+{
+  "pages": [
+    "pages/images/image_details",
+    "pages/comments/comments",
+    "pages/test/test"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "backgroundColor": "#FFFFFF"
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,17 @@
+{
+  "pages": [
+    "pages/images/images",
+    "pages/logon/logon",
+    "pages/user/user",
+    "pages/images/image_details"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "backgroundColor": "#FFFFFF"
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
+}
