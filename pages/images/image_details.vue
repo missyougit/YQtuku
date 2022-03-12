@@ -137,21 +137,30 @@
 		
 		<!-- 编辑框 -->
 		<view v-if="isFocus" class="bianji" :style="{bottom: keyboardheight+'px'}">
-			<view class="xie">
-				<textarea placeholder="友善是交流的起点..."
-					maxlength="-1"
-					:fixed="true"
-					:auto-height="true"
-					:adjust-position="false"
-					:show-confirm-bar="false"
-					:value="comments"
-					:focus="isFocus"
-					@focus="focus"
-					@input="input"
-					@keyboardheightchange="keyboardheightchange"/>
+			<view class="wuti">
+				<view class="xie">
+					<textarea placeholder="友善是交流的起点..."
+						maxlength="-1"
+						confirm-type="send"
+						:confirm-hold="true"
+						:fixed="true"
+						:auto-height="true"
+						:adjust-position="false"
+						:show-confirm-bar="false"
+						:value="comments"
+						:focus="isFocus"
+						@confirm="confirm"
+						@focus="focus"
+						@input="input"
+						@keyboardheightchange="keyboardheightchange"/>
+						
+				</view>
+				
+				<view class="fabu">
+					<text>发送</text>
+				</view>
 			</view>
 			
-				
 		</view>
 		
 		<!-- 多个回复的弹框 -->
@@ -392,6 +401,9 @@
 				if(e.detail.height==0){
 					this.isFocus = false;
 				}
+			},
+			confirm(e){
+				console.log(e);
 			}
 		}
 	}
@@ -404,7 +416,8 @@
 			.title {
 				margin-bottom: 30rpx;
 				width: 100%;
-				font-size: 40rpx;
+				font-size: 50rpx;
+				font-weight: 600;
 			}
 			.author {
 				display: flex;
@@ -420,11 +433,12 @@
 				}
 				.nickName_time {
 					margin-left: 14rpx;
+					font-weight: 800;
 					.author_nickName {
-						font-size: 28rpx;
+						font-size: 30rpx;
 					}
 					.createTime {
-						font-size: 20rpx;
+						font-size: 22rpx;
 						color: #999999;
 					}
 				}
@@ -453,7 +467,7 @@
 						flex: 1;
 						display: flex;
 						justify-content: flex-start;
-						font-size: 24rpx;
+						font-size: 26rpx;
 						color: #999999;
 					}
 					.zhuanfa {
@@ -461,7 +475,7 @@
 						display: flex;
 						justify-content: flex-end;
 						border-left: 1rpx solid #007AFF;
-						font-size: 24rpx;
+						font-size: 26rpx;
 						color: #999999;
 					}
 				}
@@ -487,8 +501,8 @@
 						.nicheng {
 							flex: 8;
 							margin-left: 20rpx;
-							font-size: 26rpx;
-							font-weight: 550;
+							font-size: 28rpx;
+							font-weight: 800;
 						}
 						.dianzan {
 							flex: 2;
@@ -496,7 +510,7 @@
 							justify-content: flex-end;
 							width: 30rpx;
 							height: 30rpx;
-							font-size: 22rpx;
+							font-size: 24rpx;
 							line-height: 32rpx;
 							color: #999999;
 							image {
@@ -510,12 +524,12 @@
 						
 					}
 					.pinglunneirong {
-						font-size: 26rpx;
+						font-size: 28rpx;
 						margin-left: 70rpx;
 						margin-bottom: 18rpx;
 					}
 					.huifu {
-						font-size: 22rpx;
+						font-size: 24rpx;
 						margin-left: 70rpx;
 						height: 40rpx;
 						line-height: 40rpx;
@@ -547,7 +561,7 @@
 			justify-content: center;
 			.xiepinglun {
 				flex: 3;
-				font-size: 26rpx;
+				font-size: 28rpx;
 				border-radius: 30rpx;
 				display: flex;
 				background-color: #F1F1F1;
@@ -567,7 +581,7 @@
 				.pinglunshu {
 					position: absolute;
 					color: #FFFFFF;
-					font-size: 16rpx;
+					font-size: 18rpx;
 					border-radius: 10rpx;
 					z-index: 9999;
 					background-color: #FF6A6A;
@@ -608,7 +622,7 @@
 			.jitiaohuifu {
 				text-align: center;
 				padding: 10rpx;
-				font-size: 26rpx;
+				font-size: 28rpx;
 				border-bottom: 1rpx solid #F1F1F1;
 				height: 30rpx;
 				line-height: 30rpx;
@@ -648,17 +662,17 @@
 						align-items: center;
 						justify-content: flex-end;
 						color: #DD524D;
-						font-size: 26rpx;
+						font-size: 28rpx;
 					}
 				}
 				.pinglun {
 					margin-left: 82rpx;
-					font-size: 28rpx;
+					font-size: 30rpx;
 					margin-bottom: 10rpx;
 				}
 				.pingluntime {
 					margin-left: 82rpx;
-					font-size: 22rpx;
+					font-size: 24rpx;
 					color: #C0C0C0;
 					margin-bottom: 20rpx;
 				}
@@ -681,7 +695,7 @@
 					.dianzangeshu {
 						flex: 6;
 						margin-left: 10rpx;
-						font-size: 20rpx;
+						font-size: 22rpx;
 						height: 40rpx;
 						line-height: 40rpx;
 					}
@@ -690,7 +704,7 @@
 						display: flex;
 						align-items: center;
 						justify-content: flex-end;
-						font-size: 22rpx;
+						font-size: 24rpx;
 						width: 30rpx;
 						height: 30rpx;
 						height: 40rpx;
@@ -728,7 +742,7 @@
 					.huifunicheng {
 						flex: 8;
 						margin-left: 20rpx;
-						font-size: 26rpx;
+						font-size: 28rpx;
 						font-weight: 550;
 					}
 					.zanhuifu {
@@ -737,7 +751,7 @@
 						justify-content: flex-end;
 						width: 30rpx;
 						height: 30rpx;
-						font-size: 22rpx;
+						font-size: 24rpx;
 						line-height: 32rpx;
 						color: #999999;
 						image {
@@ -751,7 +765,7 @@
 					
 				}
 				.huifushui {
-					font-size: 24rpx;
+					font-size: 26rpx;
 					margin-left: 70rpx;
 					margin-bottom: 18rpx;
 					background-color: #F1F1F1;
@@ -759,12 +773,12 @@
 					border-radius: 10rpx;
 				}
 				.huifu {
-					font-size: 26rpx;
+					font-size: 28rpx;
 					margin-left: 70rpx;
 					margin-bottom: 18rpx;
 				}
 				.huifutime {
-					font-size: 22rpx;
+					font-size: 24rpx;
 					margin-left: 70rpx;
 					height: 40rpx;
 					line-height: 40rpx;
@@ -793,7 +807,7 @@
 				justify-content: center;
 				.xiepinglun {
 					flex: 3;
-					font-size: 26rpx;
+					font-size: 28rpx;
 					border-radius: 30rpx;
 					border-top-left-radius: 30rpx;
 					border-bottom-left-radius: 30rpx;
@@ -842,18 +856,37 @@
 	}
 	
 	.bianji {
-		width: 100%;
 		margin-left: -40rpx;
 		background-color: #FFFFFF;
+		border-top: 1rpx solid #C8C7CC;
 		position: fixed;
-		z-index: 100;
-		.xie {
-			margin: 10rpx 40rpx;
-			padding: 10rpx;
-			border-radius: 10rpx;
-			background-color: #F1F1F1;
-			textarea {
-				max-height: 140rpx;
+		z-index: 9999;
+		width: 100%;
+		.wuti {
+			margin: 20rpx;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			.xie {
+				background-color: #F1F1F1;
+				flex: 5;
+				border-radius: 6rpx;
+				textarea{
+					padding: 20rpx;
+					width: 92%;
+					max-height: 150rpx;
+				}
+			}
+			.fabu {
+				flex: 1;
+				text-align: right;
+				margin-left: 10rpx;
+				text{
+					width: 100%;
+					padding: 18rpx;
+					background-color: #C8C7CC;
+					border-radius: 6rpx;
+				}
 			}
 		}
 		

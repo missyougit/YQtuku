@@ -30,7 +30,8 @@
 .details .image_details .title {
   margin-bottom: 30rpx;
   width: 100%;
-  font-size: 40rpx;
+  font-size: 50rpx;
+  font-weight: 600;
 }
 .details .image_details .author {
   display: flex;
@@ -47,12 +48,13 @@
 }
 .details .image_details .author .nickName_time {
   margin-left: 14rpx;
+  font-weight: 800;
 }
 .details .image_details .author .nickName_time .author_nickName {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 .details .image_details .author .nickName_time .createTime {
-  font-size: 20rpx;
+  font-size: 22rpx;
   color: #999999;
 }
 .details .image_details .images {
@@ -78,7 +80,7 @@
   flex: 1;
   display: flex;
   justify-content: flex-start;
-  font-size: 24rpx;
+  font-size: 26rpx;
   color: #999999;
 }
 .details .image_details .pinglunqu .shuliang .zhuanfa {
@@ -86,7 +88,7 @@
   display: flex;
   justify-content: flex-end;
   border-left: 1rpx solid #007AFF;
-  font-size: 24rpx;
+  font-size: 26rpx;
   color: #999999;
 }
 .details .image_details .pinglunqu .pinglunlist {
@@ -112,8 +114,8 @@
 .details .image_details .pinglunqu .pinglunlist .pinglunzhe .nicheng {
   flex: 8;
   margin-left: 20rpx;
-  font-size: 26rpx;
-  font-weight: 550;
+  font-size: 28rpx;
+  font-weight: 800;
 }
 .details .image_details .pinglunqu .pinglunlist .pinglunzhe .dianzan {
   flex: 2;
@@ -121,7 +123,7 @@
   justify-content: flex-end;
   width: 30rpx;
   height: 30rpx;
-  font-size: 22rpx;
+  font-size: 24rpx;
   line-height: 32rpx;
   color: #999999;
 }
@@ -133,12 +135,12 @@
   margin-right: 10rpx;
 }
 .details .image_details .pinglunqu .pinglunlist .pinglunneirong {
-  font-size: 26rpx;
+  font-size: 28rpx;
   margin-left: 70rpx;
   margin-bottom: 18rpx;
 }
 .details .image_details .pinglunqu .pinglunlist .huifu {
-  font-size: 22rpx;
+  font-size: 24rpx;
   margin-left: 70rpx;
   height: 40rpx;
   line-height: 40rpx;
@@ -162,7 +164,7 @@
 }
 .details .buttons .xiepinglun {
   flex: 3;
-  font-size: 26rpx;
+  font-size: 28rpx;
   border-radius: 30rpx;
   display: flex;
   background-color: #F1F1F1;
@@ -182,7 +184,7 @@
 .details .buttons .pinglunbutton .pinglunshu {
   position: absolute;
   color: #FFFFFF;
-  font-size: 16rpx;
+  font-size: 18rpx;
   border-radius: 10rpx;
   z-index: 9999;
   background-color: #FF6A6A;
@@ -219,7 +221,7 @@
 .details .share-item .jitiaohuifu {
   text-align: center;
   padding: 10rpx;
-  font-size: 26rpx;
+  font-size: 28rpx;
   border-bottom: 1rpx solid #F1F1F1;
   height: 30rpx;
   line-height: 30rpx;
@@ -261,16 +263,16 @@
   align-items: center;
   justify-content: flex-end;
   color: #DD524D;
-  font-size: 26rpx;
+  font-size: 28rpx;
 }
 .details .share-item .louzhu .pinglun {
   margin-left: 82rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
   margin-bottom: 10rpx;
 }
 .details .share-item .louzhu .pingluntime {
   margin-left: 82rpx;
-  font-size: 22rpx;
+  font-size: 24rpx;
   color: #C0C0C0;
   margin-bottom: 20rpx;
 }
@@ -294,7 +296,7 @@
 .details .share-item .louzhu .dianzanliebiao .dianzangeshu {
   flex: 6;
   margin-left: 10rpx;
-  font-size: 20rpx;
+  font-size: 22rpx;
   height: 40rpx;
   line-height: 40rpx;
 }
@@ -303,7 +305,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  font-size: 22rpx;
+  font-size: 24rpx;
   width: 30rpx;
   height: 30rpx;
   height: 40rpx;
@@ -338,7 +340,7 @@
 .details .share-item .huifulist .huifurenxinxi .huifunicheng {
   flex: 8;
   margin-left: 20rpx;
-  font-size: 26rpx;
+  font-size: 28rpx;
   font-weight: 550;
 }
 .details .share-item .huifulist .huifurenxinxi .zanhuifu {
@@ -347,7 +349,7 @@
   justify-content: flex-end;
   width: 30rpx;
   height: 30rpx;
-  font-size: 22rpx;
+  font-size: 24rpx;
   line-height: 32rpx;
   color: #999999;
 }
@@ -359,7 +361,7 @@
   margin-right: 10rpx;
 }
 .details .share-item .huifulist .huifushui {
-  font-size: 24rpx;
+  font-size: 26rpx;
   margin-left: 70rpx;
   margin-bottom: 18rpx;
   background-color: #F1F1F1;
@@ -367,12 +369,12 @@
   border-radius: 10rpx;
 }
 .details .share-item .huifulist .huifu {
-  font-size: 26rpx;
+  font-size: 28rpx;
   margin-left: 70rpx;
   margin-bottom: 18rpx;
 }
 .details .share-item .huifulist .huifutime {
-  font-size: 22rpx;
+  font-size: 24rpx;
   margin-left: 70rpx;
   height: 40rpx;
   line-height: 40rpx;
@@ -397,7 +399,7 @@
 }
 .details .share-item .huifubuttons .xiepinglun {
   flex: 3;
-  font-size: 26rpx;
+  font-size: 28rpx;
   border-radius: 30rpx;
   border-top-left-radius: 30rpx;
   border-bottom-left-radius: 30rpx;
@@ -438,19 +440,38 @@
   z-index: 999;
 }
 .bianji {
-  width: 100%;
   margin-left: -40rpx;
   background-color: #FFFFFF;
+  border-top: 1rpx solid #C8C7CC;
   position: fixed;
-  z-index: 100;
+  z-index: 9999;
+  width: 100%;
 }
-.bianji .xie {
-  margin: 10rpx 40rpx;
-  padding: 10rpx;
-  border-radius: 10rpx;
+.bianji .wuti {
+  margin: 20rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bianji .wuti .xie {
   background-color: #F1F1F1;
+  flex: 5;
+  border-radius: 6rpx;
 }
-.bianji .xie textarea {
-  max-height: 140rpx;
+.bianji .wuti .xie textarea {
+  padding: 20rpx;
+  width: 92%;
+  max-height: 150rpx;
+}
+.bianji .wuti .fabu {
+  flex: 1;
+  text-align: right;
+  margin-left: 10rpx;
+}
+.bianji .wuti .fabu text {
+  width: 100%;
+  padding: 18rpx;
+  background-color: #C8C7CC;
+  border-radius: 6rpx;
 }
 

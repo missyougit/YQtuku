@@ -459,6 +459,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
 var _emojis = _interopRequireDefault(__webpack_require__(/*! ../../static/js/emojis.js */ 18));var _this2 = void 0;function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
 {
   data: function data() {
@@ -543,6 +552,9 @@ var _emojis = _interopRequireDefault(__webpack_require__(/*! ../../static/js/emo
       if (e.detail.height == 0) {
         this.isFocus = false;
       }
+    },
+    confirm: function confirm(e) {
+      console.log(e);
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
