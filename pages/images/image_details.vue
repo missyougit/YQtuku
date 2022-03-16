@@ -58,49 +58,22 @@
 					</view>
 					<!-- 回复 -->
 					<view class="huifu">
-						<text class="huifushu">2回复 ></text>
-						<text class="huifushijian">30分钟前</text>
-					</view>
-				</view>
-				
-				<view class="pinglunlist">
-					<view class="pinglunzhe">
-						<view class="touxiang">
-							<image src="https://img2.baidu.com/it/u=771742995,2044743106&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=333"></image>
-						</view>
-						<view class="nicheng">
-							这个杀手不太冷静
-						</view>
-						<view class="dianzan">
-							<text>赞</text>
-							<image src="../../static/icons/dianzan.png"></image>
-							<!-- <image src="../../static/icons/dianzan2.png"></image> -->
-						</view>
-						<view class="dianzan">
-							<text>踩</text>
-							<!-- <image src="../../static/icons/cai.png"></image> -->
-							<image src="../../static/icons/caile.png"></image>
-						</view>
-					</view>
-					<view class="pinglunneirong">
-						今天你们都在干什么呢，我在这边啥也没干，好像你们呀，有咩有和我一起去流浪的
-					</view>
-					<!-- 回复 -->
-					<view class="huifu">
-						<text class="huifushu" @click="this.shareState=true">2回复 ></text>
+						<text class="huifushu" @click="shareState=true">2回复 ></text>
 						<text>30分钟前</text>
 					</view>
 				</view>
 				
 			</view>
-			
+			<view class="meipinglun">
+				已显示全部评论
+			</view>
 		</view>
 		
 		<view v-if="!isFocus" class="buttontopxian" style="margin-left: -40rpx;"></view>
 		<!-- 底部按钮区 -->
 		<view v-if="!isFocus" class="buttons">
 			<!-- 写评论 -->
-			<view class="xiepinglun"  @click="isFocus=true">
+			<view class="xiepinglun" :style="{flex: flexWidth}"  @click="isFocus=true">
 				<view class="bianjitubiao">
 					<image src="../../static/icons/bianjishuru.png" mode="widthFix"></image>
 				</view>
@@ -109,7 +82,10 @@
 				</view>
 			</view>
 			<!-- 评论图标(带评论数) -->
-			<view class="pinglunbutton btn">
+			<view v-if="shareState" class="btn">
+				<image src="../../static/icons/b"></image>
+			</view>
+			<view v-else class="pinglunbutton btn">
 				<image src="../../static/icons/pinglun.png"></image>
 				<text v-if="image.userActionCount.pingLunCount" class="pinglunshu">
 					{{image.userActionCount.pingLunCount}}
@@ -117,14 +93,14 @@
 			</view>
 			<!-- 收藏 -->
 			<view class="btn">
-				<image src="../../static/icons/star1.png"></image>
-				<!-- <image src="../../static/icons/star2.png"></image> -->
+				<image v-if="shareState" src="../../static/icons/cai.png"></image>
+				<image v-else src="../../static/icons/star1.png"></image>
 			</view>
 			<!-- 点赞 -->
 			<view class="btn">
 				<image src="../../static/icons/dianzan.png"></image>
 				<!-- <image src="../../static/icons/dianzan2.png"></image> -->
-			</view>
+			</view> 
 			<!-- 分享 -->
 			<view class="fenxiangbutton btn">
 				<image src="../../static/icons/fenxiang.png"></image>
@@ -277,41 +253,7 @@
 		    		<text>9小时前</text>
 		    	</view>
 		    </view>
-		    <!-- 回复列表的底部按钮区 -->
-		    <view class="buttontopxian"></view>
-			<view class="huifubuttons">
-		    	<!-- 写评论 -->
-		    	<view class="xiepinglun">
-		    		<view class="bianjitubiao">
-		    			<image src="../../static/icons/bianjishuru.png" mode="widthFix"></image>
-		    		</view>
-		    		<view class="tishiqu">
-		    			<text space="nbsp">写评论 ...</text>
-		    		</view>
-		    	</view>
-		    	<!-- 表情图标 -->
-		    	<view class="btn">
-		    		<image src="../../static/icons/biaoqing.png"></image>
-		    	</view>
-		    	<!-- 点赞 -->
-		    	<view class="btn">
-		    		<image src="../../static/icons/dianzan.png"></image>
-		    		<!-- <image src="../../static/icons/dianzan2.png"></image> -->
-		    	</view>
-		    	<!-- 踩 -->
-		    	<view class="btn">
-		    		<image src="../../static/icons/cai.png"></image>
-		    		<!-- <image src="../../static/icons/caile.png"></image> -->
-		    	</view>
-		    	<!-- 分享 -->
-		    	<view class="fenxiangbutton btn">
-		    		<image src="../../static/icons/fenxiang.png"></image>
-		    		<button open-type="share" 
-		    			:data-image='item'
-		    			plain="true">
-		    		</button>
-		    	</view>
-		    </view>
+		    
 		</view>
 	</view>
 </template>
@@ -411,8 +353,9 @@
 
 <style  lang="scss">
 	.details {
-		margin: 30rpx 40rpx 110rpx 40rpx;
+		margin: 30rpx 40rpx 120rpx 40rpx;
 		.image_details {
+			
 			.title {
 				margin-bottom: 30rpx;
 				width: 100%;
@@ -452,7 +395,6 @@
 				}
 			}
 			.pinglunqu {
-				
 				.shuliang {
 					display: flex;
 					flex-direction: row;
@@ -538,27 +480,33 @@
 							background-color: #F1F1F1;
 							border-radius: 20rpx;
 							margin-right: 20rpx;
-							
 						}
-						
 					}
-					
 				}
-				
 			}
-			
+			.meipinglun {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				color: #C8C7CC;
+				font-size: 26rpx;
+				margin: 50rpx 0 200rpx 0;
+			}
 		}
 	
 		.buttons {
 			width: 100%;
 			height: 80rpx;
 			position: fixed;
+			z-index: 99999;
 			padding-bottom: 20rpx;
 			bottom: 0;
 			display: flex;
 			flex-direction: row;
 			align-items: center;
 			justify-content: center;
+			background-color: #FFFFFF;
 			.xiepinglun {
 				flex: 3;
 				font-size: 28rpx;
@@ -794,45 +742,7 @@
 				
 			}
 
-			.huifubuttons {
-				margin: 30rpx 40rpx 10rpx 40rpx;
-				width: 100%;
-				height: 80rpx;
-				position: fixed;
-				padding-bottom: 10rpx;
-				bottom: 0;
-				display: flex;
-				flex-direction: row;
-				align-items: center;
-				justify-content: center;
-				.xiepinglun {
-					flex: 3;
-					font-size: 28rpx;
-					border-radius: 30rpx;
-					border-top-left-radius: 30rpx;
-					border-bottom-left-radius: 30rpx;
-					display: flex;
-					background-color: #F1F1F1;
-					.bianjitubiao {
-						padding: 6rpx 20rpx;
-						image {
-							width: 34rpx;
-						}
-					}
-					.tishiqu {
-						padding: 6rpx 20rpx 6rpx 0;
-					}
-					
-				}
-				.fenxiangbutton {
-					margin-right: 54rpx;
-					button {
-						position: absolute;
-						height: 44rpx;
-						border: none;
-					}
-				}
-			}
+			
 		}
 		
 	}
