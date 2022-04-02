@@ -25,7 +25,7 @@
 /* 透明度 */
 /* 文章场景相关 */
 .details {
-  margin: 30rpx 40rpx 120rpx 40rpx;
+  margin: 30rpx 32rpx 120rpx 32rpx;
 }
 .details .image_details .title {
   margin-bottom: 30rpx;
@@ -205,7 +205,7 @@
   left: 60rpx;
 }
 .details .buttons .fenxiangbutton {
-  margin-right: 54rpx;
+  margin-right: 36rpx;
 }
 .details .buttons .fenxiangbutton button {
   position: absolute;
@@ -222,16 +222,19 @@
   left: 0;
   bottom: 0;
   width: 100%;
-  height: 100vh;
+  height: 80vh;
   background-color: #FFFFFF;
   transition: all 0.3s ease;
   -webkit-transform: translateY(100%);
           transform: translateY(100%);
   z-index: 1999;
+  border-top: solid 1rpx #C8C7CC;
+  border-top-left-radius: 20rpx;
+  border-top-right-radius: 20rpx;
 }
 .details .share-item .jitiaohuifu {
   text-align: center;
-  padding: 10rpx;
+  padding: 20rpx 0;
   font-size: 28rpx;
   border-bottom: 1rpx solid #F1F1F1;
   height: 30rpx;
@@ -244,7 +247,7 @@
   height: 26rpx;
 }
 .details .share-item .louzhu {
-  margin: 20rpx 40rpx;
+  margin: 20rpx 32rpx;
 }
 .details .share-item .louzhu .louzhuxinxi {
   margin-bottom: 8rpx;
@@ -265,7 +268,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-left: 20rpx;
+  margin-left: 14rpx;
   font-weight: 600;
 }
 .details .share-item .louzhu .louzhuxinxi .guanzhuanniu {
@@ -277,19 +280,19 @@
   font-size: 28rpx;
 }
 .details .share-item .louzhu .pinglun {
-  margin-left: 82rpx;
+  margin-left: 74rpx;
   font-size: 30rpx;
   margin-bottom: 10rpx;
 }
 .details .share-item .louzhu .pingluntime {
-  margin-left: 82rpx;
+  margin-left: 74rpx;
   font-size: 24rpx;
   color: #C0C0C0;
   margin-bottom: 20rpx;
 }
 .details .share-item .louzhu .dianzanliebiao {
   display: flex;
-  margin-left: 82rpx;
+  margin-left: 74rpx;
 }
 .details .share-item .louzhu .dianzanliebiao .touxiangliebiao {
   display: flex;
@@ -329,7 +332,7 @@
   border-radius: 50%;
 }
 .details .share-item .huifulist {
-  margin: 0 40rpx 30rpx 40rpx;
+  margin: 0 32rpx 30rpx 32rpx;
 }
 .details .share-item .huifulist .huifurenxinxi {
   display: flex;
@@ -350,7 +353,7 @@
 }
 .details .share-item .huifulist .huifurenxinxi .huifunicheng {
   flex: 8;
-  margin-left: 20rpx;
+  margin-left: 14rpx;
   font-size: 28rpx;
   font-weight: 550;
 }
@@ -373,7 +376,7 @@
 }
 .details .share-item .huifulist .huifushui {
   font-size: 26rpx;
-  margin-left: 70rpx;
+  margin-left: 62rpx;
   margin-bottom: 18rpx;
   background-color: #F1F1F1;
   padding: 10rpx;
@@ -381,12 +384,12 @@
 }
 .details .share-item .huifulist .huifu {
   font-size: 28rpx;
-  margin-left: 70rpx;
+  margin-left: 62rpx;
   margin-bottom: 18rpx;
 }
 .details .share-item .huifulist .huifutime {
   font-size: 24rpx;
-  margin-left: 70rpx;
+  margin-left: 62rpx;
   height: 40rpx;
   line-height: 40rpx;
 }
@@ -413,7 +416,7 @@
   z-index: 999;
 }
 .bianji {
-  margin-left: -40rpx;
+  margin-left: -32rpx;
   background-color: #FFFFFF;
   border-top: 1rpx solid #C8C7CC;
   position: fixed;
@@ -443,7 +446,7 @@
 }
 .bianji .wuti .fabu text {
   width: 100%;
-  padding: 18rpx;
+  padding: 16rpx;
   background-color: #C8C7CC;
   border-radius: 6rpx;
 }

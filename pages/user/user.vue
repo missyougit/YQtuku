@@ -18,7 +18,7 @@
 					<text>分享</text>
 				</view>
 				<view class="doing_item" @click="getActionList(openId,'pingLun')">
-					<text>{{userActionCount.pingLunCount}}</text>
+					<text>{{userActionCount.shouCangCount}}</text>
 					<text>评论</text>
 				</view>
 			</view>

@@ -56,9 +56,14 @@
 					<view class="pinglunneirong">
 						今天你们都在干什么呢，我在这边啥也没干，好像你们呀，有咩有和我一起去流浪的
 					</view>
-					<!-- 回复 -->
-					<view class="huifu">
+					<!-- 打开回复列表 -->
+					<!-- <view class="huifu">
 						<text class="huifushu" @click="shareState=true">2回复 ></text>
+						<text>30分钟前</text>
+					</view> -->
+					<!-- 直接回复 -->
+					<view class="huifu">
+						<text class="huifushu" @click="zhijiehuifu">回复 ></text>
 						<text>30分钟前</text>
 					</view>
 				</view>
@@ -73,7 +78,7 @@
 		<!-- 底部按钮区 -->
 		<view v-if="!isFocus" class="buttons">
 			<!-- 写评论 -->
-			<view class="xiepinglun" :style="{flex: flexWidth}"  @click="isFocus=true">
+			<view class="xiepinglun" @click="isFocus=true">
 				<view class="bianjitubiao">
 					<image src="../../static/icons/bianjishuru.png" mode="widthFix"></image>
 				</view>
@@ -83,7 +88,7 @@
 			</view>
 			<!-- 评论图标(带评论数) -->
 			<view v-if="shareState" class="btn">
-				<image src="../../static/icons/b"></image>
+				<image src="../../static/icons/biaoqing.png"></image>
 			</view>
 			<view v-else class="pinglunbutton btn">
 				<image src="../../static/icons/pinglun.png"></image>
@@ -93,13 +98,12 @@
 			</view>
 			<!-- 收藏 -->
 			<view class="btn">
-				<image v-if="shareState" src="../../static/icons/cai.png"></image>
-				<image v-else src="../../static/icons/star1.png"></image>
+				<image v-if="shareState" :src="caiIcon"></image>
+				<image v-else :src="starIcon"></image>
 			</view>
 			<!-- 点赞 -->
 			<view class="btn">
-				<image src="../../static/icons/dianzan.png"></image>
-				<!-- <image src="../../static/icons/dianzan2.png"></image> -->
+				<image :src="dianzanIcon"></image>
 			</view> 
 			<!-- 分享 -->
 			<view class="fenxiangbutton btn">
@@ -115,24 +119,23 @@
 		<view v-if="isFocus" class="bianji" :style="{bottom: keyboardheight+'px'}">
 			<view class="wuti">
 				<view class="xie">
-					<textarea placeholder="友善是交流的起点..."
+					<textarea :placeholder="placeholder"
 						maxlength="-1"
-						confirm-type="send"
-						:confirm-hold="true"
-						:fixed="true"
 						:auto-height="true"
 						:adjust-position="false"
 						:show-confirm-bar="false"
-						:value="comments"
+						:value="content"
 						:focus="isFocus"
-						@confirm="confirm"
 						@focus="focus"
 						@input="input"
 						@keyboardheightchange="keyboardheightchange"/>
 						
 				</view>
 				
-				<view class="fabu">
+				<view v-if="isSend" class="fabu" @click="send">
+					<text style="color: #FFFFFF;background-color: #007AFF;">发送</text>
+				</view>
+				<view v-else class="fabu">
 					<text>发送</text>
 				</view>
 			</view>
@@ -140,7 +143,7 @@
 		</view>
 		
 		<!-- 多个回复的弹框 -->
-		<view class="share-item" :class="{'share-show': shareState}">
+		<view class="share-item" :class="{'share-show': shareState}" @touchmove.stop.prevent>
 		    <view class="jitiaohuifu">
 				<image @click="shareState = false" src="../../static/icons/cha.png"></image>
 		    	<text>3条回复</text>
@@ -193,7 +196,7 @@
 		    	</view>
 		    </view>
 		    <view style="border-bottom: solid 1rpx #F1F1F1; margin: 20rpx 0;"></view>
-		    <view style="margin-left: 40rpx; margin-bottom: 30rpx;">全部回复</view>
+		    <view style="margin-left: 32rpx; margin-bottom: 30rpx;">全部回复</view>
 		    <!-- 回复列表 -->
 		    <view class="huifulist">
 		    	<view class="huifurenxinxi">
@@ -259,7 +262,7 @@
 </template>
 
 <script>
-	import emojis from '../../static/js/emojis.js'
+	
 	export default {
 		data() {
 			const baseUrl = getApp().globalData.baseUrl;
@@ -268,10 +271,21 @@
 				image: {},
 				openId: '',
 				shareState: false,
-				emojis: emojis,
 				isFocus: false,
-				comments: '',
-				keyboardheight: 0
+				content: '',
+				keyboardheight: 0,
+				isSend: false,
+				dianzanIcon: '../../static/icons/dianzan.png',
+				caiIcon: '../../static/icons/cai.png',
+				starIcon: '../../static/icons/star1.png',
+				placeholder: '友善是交流的起点...',
+				type: 0,
+				targetCommentsId: 0,
+				pages:1,
+				total:0,
+				pageNum:1,
+				pageSize:2,
+				comments: []
 			}
 		},
 		onLoad(options) {
@@ -287,8 +301,10 @@
 			  this.image = data
 			})
 			
-			console.log(this.image);
+			let url = this.baseUrl+"/comments/getComments?pageNum="+this.pageNum+"&pageSize="+this.pageSize+'&imagesId='+this.image.id;
+			this.getComments(url);
 			
+			console.log(this.image);
 		},
 		onShareAppMessage: (res) => {
 			if (res.from === 'button') {
@@ -324,28 +340,83 @@
 			}
 		},
 		onShow(options) {},
-		
+		onReachBottom(){
+			if(this.pageNum <= this.pages){
+				let url = this.baseUrl+"/comments/getComments?pageNum="+this.pageNum+"&pageSize="+this.pageSize+"&imagesId="+this.image.id;
+				this.getComments(url);
+			}
+		},
 		methods: {
+			getComments(url){
+				uni.request({
+				    url: url,
+				    success: (res) => {
+						let {status,message,result} = res.data;
+						if(status == 200){
+							this.pages = result.pages;
+							this.total = result.total;
+							if(this.pageNum == 1){
+								this.comments = result.list;
+							}else{
+								this.comments = [...this.comments,...result.list];
+							}
+							this.pageNum ++;
+						}else{
+							uni.showToast({
+							    title: message,
+							    duration: 1000,
+								icon: 'none'
+							});
+						}
+						
+				    }
+				});
+			},
 			focus(e){
-				console.log(e);
 				this.keyboardheight = e.detail.height;
-				console.log(this.keyboardheight);
-				
-				// rpx换算px (屏幕宽度/750)	px换算rpx (750/屏幕宽度)
-				// let pxToRpx = 750/width;
-				// let width = uni.getSystemInfoSync().windowWidth;
-				// let pxToRpx = 750/width;
-				// this.keyboardheight = pxToRpx*height;
-				
 			},
 			keyboardheightchange(e){
-				console.log("keyboardheightchange",e);
-				if(e.detail.height==0){
+				if(e.detail.height == 0){
 					this.isFocus = false;
+					this.placeholder = '友善是交流的起点...';
+					this.type = 0,
+					this.targetCommentsId = 0
 				}
 			},
-			confirm(e){
-				console.log(e);
+			input(e){
+				let {value} = e.detail;
+				this.content = value.trim();
+				this.isSend = false;
+				if (this.content) {
+					this.isSend = true;
+				}
+			},
+			send(){
+				
+				let comments = {
+					openId: this.openId,
+					imagesId: this.image.id,
+					targetCommentsId: this.targetCommentsId,
+					content: this.content,
+					type: this.type
+				};
+				
+				uni.request({
+					url: this.baseUrl+'/comments/addComments',
+					method: "POST",
+					data: comments,
+					success: (result) => {
+						console.log(result);
+						
+					}
+				})
+				
+			},
+			zhijiehuifu(targetCommentsId){
+				this.isFocus = true;
+				this.placeholder = '回复 勇敢的心 :';
+				this.type = 1;
+				this.targetCommentsId = targetCommentsId;
 			}
 		}
 	}
@@ -353,7 +424,7 @@
 
 <style  lang="scss">
 	.details {
-		margin: 30rpx 40rpx 120rpx 40rpx;
+		margin: 30rpx 32rpx 120rpx 32rpx;
 		.image_details {
 			
 			.title {
@@ -541,7 +612,7 @@
 				}
 			}
 			.fenxiangbutton {
-				margin-right: 54rpx;
+				margin-right: 36rpx;
 				button {
 					position: absolute;
 					height: 44rpx;
@@ -561,15 +632,17 @@
 		    left: 0;
 		    bottom: 0;
 		    width: 100%;
-		    height: 100vh;
+		    height: 80vh;
 		    background-color: #FFFFFF;
 		    transition: all 0.3s ease;
 		    transform: translateY(100%);
 		    z-index: 1999;
-			
+			border-top: solid 1rpx #C8C7CC;
+			border-top-left-radius: 20rpx;
+			border-top-right-radius: 20rpx;
 			.jitiaohuifu {
 				text-align: center;
-				padding: 10rpx;
+				padding: 20rpx 0;
 				font-size: 28rpx;
 				border-bottom: 1rpx solid #F1F1F1;
 				height: 30rpx;
@@ -582,7 +655,7 @@
 				}
 			}
 			.louzhu {
-				margin: 20rpx 40rpx;
+				margin: 20rpx 32rpx;
 				.louzhuxinxi {
 					margin-bottom: 8rpx;
 					display: flex;
@@ -601,7 +674,7 @@
 						display: flex;
 						align-items: center;
 						justify-content: flex-start;
-						margin-left: 20rpx;
+						margin-left: 14rpx;
 						font-weight: 600;
 					}
 					.guanzhuanniu {
@@ -614,19 +687,19 @@
 					}
 				}
 				.pinglun {
-					margin-left: 82rpx;
+					margin-left: 74rpx;
 					font-size: 30rpx;
 					margin-bottom: 10rpx;
 				}
 				.pingluntime {
-					margin-left: 82rpx;
+					margin-left: 74rpx;
 					font-size: 24rpx;
 					color: #C0C0C0;
 					margin-bottom: 20rpx;
 				}
 				.dianzanliebiao {
 					display: flex;
-					margin-left: 82rpx;
+					margin-left: 74rpx;
 					.touxiangliebiao {
 						display: flex;
 						.touxiang_item {
@@ -670,7 +743,7 @@
 			}
 			
 			.huifulist {
-				margin: 0 40rpx 30rpx 40rpx;
+				margin: 0 32rpx 30rpx 32rpx;
 				.huifurenxinxi {
 					display: flex;
 					flex-direction: row;
@@ -689,7 +762,7 @@
 					}
 					.huifunicheng {
 						flex: 8;
-						margin-left: 20rpx;
+						margin-left: 14rpx;
 						font-size: 28rpx;
 						font-weight: 550;
 					}
@@ -714,7 +787,7 @@
 				}
 				.huifushui {
 					font-size: 26rpx;
-					margin-left: 70rpx;
+					margin-left: 62rpx;
 					margin-bottom: 18rpx;
 					background-color: #F1F1F1;
 					padding: 10rpx;
@@ -722,12 +795,12 @@
 				}
 				.huifu {
 					font-size: 28rpx;
-					margin-left: 70rpx;
+					margin-left: 62rpx;
 					margin-bottom: 18rpx;
 				}
 				.huifutime {
 					font-size: 24rpx;
-					margin-left: 70rpx;
+					margin-left: 62rpx;
 					height: 40rpx;
 					line-height: 40rpx;
 					.huifushu {
@@ -735,16 +808,10 @@
 						background-color: #F1F1F1;
 						border-radius: 20rpx;
 						margin-right: 20rpx;
-						
 					}
-					
 				}
-				
 			}
-
-			
 		}
-		
 	}
 	
 	.btn {
@@ -766,7 +833,7 @@
 	}
 	
 	.bianji {
-		margin-left: -40rpx;
+		margin-left: -32rpx;
 		background-color: #FFFFFF;
 		border-top: 1rpx solid #C8C7CC;
 		position: fixed;
@@ -793,7 +860,7 @@
 				margin-left: 10rpx;
 				text{
 					width: 100%;
-					padding: 18rpx;
+					padding: 16rpx;
 					background-color: #C8C7CC;
 					border-radius: 6rpx;
 				}

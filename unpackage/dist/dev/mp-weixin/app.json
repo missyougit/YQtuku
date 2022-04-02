@@ -1,5 +1,8 @@
 {
   "pages": [
+    "pages/images/images",
+    "pages/logon/logon",
+    "pages/user/user",
     "pages/images/image_details",
     "pages/comments/comments",
     "pages/test/test"
@@ -11,6 +14,5 @@
     "navigationBarBackgroundColor": "#FFFFFF",
     "backgroundColor": "#FFFFFF"
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

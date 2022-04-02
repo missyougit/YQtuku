@@ -37,7 +37,7 @@
 				</view>
 				<view class="action-item commet" @click="to_image_details(item)">
 					<image src="../../static/icons/pinglun.png"></image>
-					<text v-if="item.userActionCount.pingLunCount">{{item.userActionCount.pingLunCount}}</text>
+					<text v-if="item.userActionCount.shouCangCount">{{item.userActionCount.shouCangCount}}</text>
 					<text v-else>评论</text>
 				</view>
 				<view class="action-item like" @click="dianzan(item)">
@@ -58,9 +58,9 @@
 			const baseUrl = getApp().globalData.baseUrl;
 			return {
 				baseUrl: baseUrl,
-				pageCount:1,
+				pages:1,
 				total:0,
-				pageNo:1,
+				pageNum:1,
 				pageSize:5,
 				images: [],
 				openId: '',
@@ -117,7 +117,7 @@
 		// --------------悬浮分享按钮------------------
 		onLoad() {
 			this.openId = uni.getStorageSync("openId");
-			let url = this.baseUrl+"/image/list?pageNo="+this.pageNo+"&pageSize="+this.pageSize+"&openId="+this.openId;
+			let url = this.baseUrl+"/image/list?pageNum="+this.pageNum+"&pageSize="+this.pageSize+"&openId="+this.openId;
 			this.getImages(url);
 		},
 		onShareAppMessage: (res) => {
@@ -129,7 +129,6 @@
 				    path: './image_details',
 					imageUrl: image.imagesList[0],
 					success: (res) => {
-						console.log("pppppp");
 						let userAction = {
 							openId: this.openId,
 							imagesId: image.id,
@@ -160,15 +159,13 @@
 		},
 		
 		onShow() {
-
+			this.openId = uni.getStorageSync("openId");
 			if(this.openId != ''){
 				let url = this.baseUrl+"/user/userInfo?openId="+this.openId;
 				uni.request({
 				    url: url,
 				    success: (res) => {
-						
-						let {result} = res.data;
-						this.avatarUrl = result.avatarUrl;
+						this.avatarUrl = res.data.avatarUrl;
 				    }
 				});
 			}
@@ -179,8 +176,8 @@
 			if(!this.toLogon()){
 				return;
 			}
-			this.pageNo = 1;
-			let url = this.baseUrl+"/image/list?pageNo="+this.pageNo+"&pageSize="+this.pageSize+"&openId="+this.openId;
+			this.pageNum = 1;
+			let url = this.baseUrl+"/image/list?pageNum="+this.pageNum+"&pageSize="+this.pageSize+"&openId="+this.openId;
 			this.getImages(url);
 			uni.stopPullDownRefresh();
 		},
@@ -189,8 +186,8 @@
 			if(!this.toLogon()){
 				return;
 			}
-			if(this.pageNo <= this.pageCount){
-				let url = this.baseUrl+"/image/list?pageNo="+this.pageNo+"&pageSize="+this.pageSize+"&openId="+this.openId;
+			if(this.pageNum <= this.pages){
+				let url = this.baseUrl+"/image/list?pageNum="+this.pageNum+"&pageSize="+this.pageSize+"&openId="+this.openId;
 				this.getImages(url);
 			}
 		},
@@ -237,17 +234,16 @@
 				uni.request({
 				    url: url,
 				    success: (res) => {
-						
 						let {status,message,result} = res.data;
 						if(status == 200){
-							this.pageCount = result.pageCount;
+							this.pages = result.pages;
 							this.total = result.total;
-							if(this.pageNo == 1){
-								this.images = result.tukuList;
+							if(this.pageNum == 1){
+								this.images = result.list;
 							}else{
-								this.images = [...this.images,...result.tukuList];
+								this.images = [...this.images,...result.list];
 							}
-							this.pageNo ++;
+							this.pageNum ++;
 						}else{
 							uni.showToast({
 							    title: message,
@@ -357,18 +353,18 @@
 			width: 100%;
 			border-bottom: #F4F4F4 solid;
 			.title {
-				margin: 30rpx 40rpx 20rpx 40rpx;
+				margin: 30rpx 32rpx 20rpx 32rpx;
 			}
 			
 			.image_list {
-				margin: 0 0 0 40rpx;
+				margin: 0 0 0 32rpx;
 				display: flex;
 				flex-wrap: wrap;
 				.imageList{
-					width: 218rpx;
-					height: 218rpx;
+					width: 222rpx;
+					height: 222rpx;
 					position: relative;
-					margin: 0 8rpx 8rpx 0;
+					margin: 0 10rpx 10rpx 0;
 					image{
 						width: 100%;
 						height: 100%;
@@ -421,7 +417,7 @@
 		margin: 0 160rpx 0 50rpx;
 	}
 	.share {
-		margin: 0 90rpx 0 40rpx;
+		margin: 0 98rpx 0 32rpx;
 	}
 	.commet {
 		margin: 0 90rpx 0 200rpx;

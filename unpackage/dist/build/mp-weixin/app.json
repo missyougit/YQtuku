@@ -3,7 +3,9 @@
     "pages/images/images",
     "pages/logon/logon",
     "pages/user/user",
-    "pages/images/image_details"
+    "pages/images/image_details",
+    "pages/comments/comments",
+    "pages/test/test"
   ],
   "subPackages": [],
   "window": {

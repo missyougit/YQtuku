@@ -1,24 +1,24 @@
 {
 	"pages": [
-		// {
-		// 	"path": "pages/images/images",
-		// 	"style": {
-		// 		"navigationBarTitleText": "YQ图库",
-		// 		"enablePullDownRefresh": true
-		// 	}
-		// },
-		// {
-		// 	"path": "pages/logon/logon",
-		// 	"style": {
-		// 		"navigationBarTitleText": "登录"
-		// 	}
-		// },
-		// {
-		// 	"path": "pages/user/user",
-		// 	"style": {
-		// 		"navigationBarTitleText": "个人中心"
-		// 	}
-		// },
+		{
+			"path": "pages/images/images",
+			"style": {
+				"navigationBarTitleText": "YQ图库",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/logon/logon",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		},
+		{
+			"path": "pages/user/user",
+			"style": {
+				"navigationBarTitleText": "个人中心"
+			}
+		},
 		{
 			"path": "pages/images/image_details",
 			"style": {
